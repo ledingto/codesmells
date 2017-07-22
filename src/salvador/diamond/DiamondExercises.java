@@ -2,10 +2,18 @@ package salvador.diamond;
 
 /*
  Code Smell #1: Duplicate Code (Dispensable)
- Solution: helper method printCharacters(..) and printTriangle(..)
+ Solution: helper method printCharacters(..)
 
- Code Smell #2: Comments
+ Code Smell #2: Comments (Dispensable)
  Solution: delete the comments and change variable/method names to explain purpose/function
+
+ Code Smell #3: Long Method (Bloater)
+ Solution: extract logic (loops, conditionals, etc.) into helper method [drawBottomPartDiamond(..)]
+
+ Code Smell #4: (Bloater)
+ Solution:
+
+ Code Smell #5: (OO Abuser)
  */
 
 
@@ -13,7 +21,6 @@ public class DiamondExercises {
     public static void main(String[] args) {
         drawAnIsoscelesTriangle(3);
         System.out.println();
-
         drawADiamond(5);
         drawADiamondWithYourName(3);
     }
@@ -27,7 +34,12 @@ public class DiamondExercises {
 
         int startingNumOfSpaces = n-1;
         int startingNumAsterisks = 1;
-        printTriangle(n, startingNumOfSpaces, startingNumAsterisks, false);
+        for (int i = 1; i <= n; i++, startingNumOfSpaces--, startingNumAsterisks+=2){
+            printCharacters(startingNumOfSpaces, " ");
+            printCharacters(startingNumAsterisks, "*");
+            printCharacters(startingNumOfSpaces, " ");
+            System.out.println();
+        }
     }
 
 
@@ -40,17 +52,12 @@ public class DiamondExercises {
 //              *
     private static void drawADiamond(int n) {
         drawAnIsoscelesTriangle(n);
-
-        // reverse what was done in drawnIsoscelesTriangle()
-        int startingNumOfSpaces = 1;
-        int startingNumAsterisks = (n*2)-3;
-
-        printTriangle(n, startingNumOfSpaces, startingNumAsterisks, true);
+        drawBottomPartDiamond(n);
     }
+
 
     //    Diamond with Name
 //    Given a number n, print a centered diamond with your name in place of the middle line. Example for n=3:
-//
 //             *
 //            ***
 //           Bill
@@ -59,7 +66,7 @@ public class DiamondExercises {
     private static void drawADiamondWithYourName(int n) {
         int numAsterisksAtBase = (n * 2)-1;
         int numAsterisksInRow = 1;
-        
+
         for (int i = 1; i < n; i++, numAsterisksInRow +=2){
             int currPadding = (numAsterisksAtBase - numAsterisksInRow)/2;
 
@@ -72,17 +79,7 @@ public class DiamondExercises {
 
         System.out.println("Salvador");
 
-        numAsterisksInRow -= 2;
-
-        for (int i = 1; i < n; i++, numAsterisksInRow -=2){
-            int currPadding = (numAsterisksAtBase - numAsterisksInRow)/2;
-
-            printCharacters(currPadding, " ");
-            printCharacters(numAsterisksInRow, "*");
-            printCharacters(currPadding, " ");
-
-            System.out.println();
-        }
+        drawBottomPartDiamond(n);
     }
 
 
@@ -92,21 +89,14 @@ public class DiamondExercises {
         }
     }
 
-    private static void printTriangle(int n, int numPadding, int start, boolean reverse) {
-        for (int i = 1; i <= n; i++){
-            printCharacters(numPadding, " ");
-            printCharacters(start, "*");
-            printCharacters(numPadding, " ");
-
+    private static void drawBottomPartDiamond(int n) {
+        int startingNumOfSpaces = 1;
+        int startingNumAsterisks = (n*2)-3;
+        for (int i = 1; i <= n; i++, startingNumOfSpaces++, startingNumAsterisks-=2){
+            printCharacters(startingNumOfSpaces, " ");
+            printCharacters(startingNumAsterisks, "*");
+            printCharacters(startingNumOfSpaces, " ");
             System.out.println();
-            if (reverse==true) {
-                numPadding++;
-                start-=2;
-            }
-            else {
-                numPadding--;
-                start+=2;
-            }
         }
     }
 }
