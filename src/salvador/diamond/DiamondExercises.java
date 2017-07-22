@@ -3,6 +3,9 @@ package salvador.diamond;
 /*
  Code Smell #1: Duplicate Code (Dispensable)
  Solution: helper method printCharacters(..) and printTriangle(..)
+
+ Code Smell #2: Comments
+ Solution: delete the comments and change variable/method names to explain purpose/function
  */
 
 
@@ -22,30 +25,10 @@ public class DiamondExercises {
 //            *****
     private static void drawAnIsoscelesTriangle(int n) {
 
-        /*
-         *-----------------
-         * The General Idea
-         * ----------------
-         * Draw the triangle top down calculating the length of padding based on the size of the base.
-         * Since each new line is only as long as the base, we know that each line consists of n * 2 characters.
-         *
-         * We know that from top to bottom:
-         * - Each new layer of the triangle increases by two asterisks.
-         * - The remainder is all padding
-         * - The left and right padding are symmetrical
-         *
-         * Thus:
-         * At each layer we draw the left padding, the number of asterisks in a layer, and the right padding
-         */
-
-        int numPadding = n-1;
-        int start = 1;
-
-        printTriangle(n, numPadding, start, false);
-
+        int startingNumOfSpaces = n-1;
+        int startingNumAsterisks = 1;
+        printTriangle(n, startingNumOfSpaces, startingNumAsterisks, false);
     }
-
-
 
 
     //    Diamond
@@ -59,10 +42,10 @@ public class DiamondExercises {
         drawAnIsoscelesTriangle(n);
 
         // reverse what was done in drawnIsoscelesTriangle()
-        int numPadding = 1;
-        int start = (n*2)-3;
+        int startingNumOfSpaces = 1;
+        int startingNumAsterisks = (n*2)-3;
 
-        printTriangle(n, numPadding, start, true);
+        printTriangle(n, startingNumOfSpaces, startingNumAsterisks, true);
     }
 
     //    Diamond with Name
@@ -74,50 +57,35 @@ public class DiamondExercises {
 //            ***
 //             *
     private static void drawADiamondWithYourName(int n) {
-        int numBase = (n * 2)-1; //# of asterisks that the base consist of
-        int start = 1;           //# of asterisks the tip of the triangle has
+        int numAsterisksAtBase = (n * 2)-1;
+        int numAsterisksInRow = 1;
+        
+        for (int i = 1; i < n; i++, numAsterisksInRow +=2){
+            int currPadding = (numAsterisksAtBase - numAsterisksInRow)/2;
 
-        //We work our way down starting from the top
-        //similar to first exercise except we don't draw the base...
-        // the base becomes our name
-        for (int i = 1; i < n; i++, start+=2){
-            int currPadding = (numBase - start)/2;
-
-            //print left padding
             printCharacters(currPadding, " ");
-
-            //print horizontal slice of triangle
-            printCharacters(start, "*");
-
-            //print right padding
+            printCharacters(numAsterisksInRow, "*");
             printCharacters(currPadding, " ");
 
             System.out.println();
         }
 
-        //Write our name
         System.out.println("Salvador");
 
-        //Work our way down
-        start -= 2;
+        numAsterisksInRow -= 2;
 
-        for (int i = 1; i < n; i++, start-=2){
-            int currPadding = (numBase - start)/2;
+        for (int i = 1; i < n; i++, numAsterisksInRow -=2){
+            int currPadding = (numAsterisksAtBase - numAsterisksInRow)/2;
 
-            //print left padding
             printCharacters(currPadding, " ");
-
-            //print horizontal slice of triangle
-            printCharacters(start, "*");
-
-            //print right padding
+            printCharacters(numAsterisksInRow, "*");
             printCharacters(currPadding, " ");
 
             System.out.println();
         }
     }
 
-    
+
     private static void printCharacters(int numCharacters, String character) {
         for (int j = 0; j < numCharacters; j++) {
             System.out.print(character);
@@ -126,16 +94,11 @@ public class DiamondExercises {
 
     private static void printTriangle(int n, int numPadding, int start, boolean reverse) {
         for (int i = 1; i <= n; i++){
-
-            //left padding
             printCharacters(numPadding, " ");
-            //asterisks in between
             printCharacters(start, "*");
-            //right padding
             printCharacters(numPadding, " ");
 
             System.out.println();
-
             if (reverse==true) {
                 numPadding++;
                 start-=2;
