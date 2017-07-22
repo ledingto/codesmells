@@ -1,5 +1,11 @@
 package salvador.diamond;
 
+/*
+ Code Smell #1: Duplicate Code (Dispensable)
+ Solution: helper method printCharacters(..)
+ */
+
+
 public class DiamondExercises {
     public static void main(String[] args) {
         drawAnIsoscelesTriangle(3);
@@ -38,22 +44,24 @@ public class DiamondExercises {
         for (int i = 1; i <= n; i++, numPadding--, start+=2){
 
             //left padding
-            for (int j = 0; j < numPadding; j++){
-                System.out.print(" ");
-            }
+            printCharacters(numPadding, " ");
             //asterisks in between
-            for (int j = 0; j < start; j++){
-                System.out.print("*");
-            }
+            printCharacters(start, "*");
             //right padding
-            for (int j = 0; j < numPadding; j++){
-                System.out.print(" ");
-            }
+            printCharacters(numPadding, " ");
 
             System.out.println();
         }
 
     }
+
+    private static void printCharacters(int numCharacters, String character) {
+        for (int j = 0; j < numCharacters; j++) {
+            System.out.print(character);
+        }
+    }
+
+
 
     //    Diamond
 //    Given a number n, print a centered diamond. Example for n=3:
@@ -72,17 +80,11 @@ public class DiamondExercises {
         for (int i = 1; i <= n; i++, numPadding++, start-=2){
 
             //left padding
-            for (int j = 0; j < numPadding; j++){
-                System.out.print(" ");
-            }
+            printCharacters(numPadding, " ");
             //asterisks in between
-            for (int j = 0; j < start; j++){
-                System.out.print("*");
-            }
+            printCharacters(start, "*");
             //right padding
-            for (int j = 0; j < numPadding; j++){
-                System.out.print(" ");
-            }
+            printCharacters(numPadding, " ");
 
             System.out.println();
         }
@@ -107,19 +109,13 @@ public class DiamondExercises {
             int currPadding = (numBase - start)/2;
 
             //print left padding
-            for (int j = 0; j < currPadding; j++){
-                System.out.print(" ");
-            }
+            printCharacters(currPadding, " ");
 
             //print horizontal slice of triangle
-            for (int j = 0; j < start; j++){
-                System.out.print("*");
-            }
+            printCharacters(start, "*");
 
             //print right padding
-            for (int j = 0; j < currPadding; j++){
-                System.out.print(" ");
-            }
+            printCharacters(currPadding, " ");
 
             System.out.println();
         }
@@ -134,19 +130,13 @@ public class DiamondExercises {
             int currPadding = (numBase - start)/2;
 
             //print left padding
-            for (int j = 0; j < currPadding; j++){
-                System.out.print(" ");
-            }
+            printCharacters(currPadding, " ");
 
             //print horizontal slice of triangle
-            for (int j = 0; j < start; j++){
-                System.out.print("*");
-            }
+            printCharacters(start, "*");
 
             //print right padding
-            for (int j = 0; j < currPadding; j++){
-                System.out.print(" ");
-            }
+            printCharacters(currPadding, " ");
 
             System.out.println();
         }
