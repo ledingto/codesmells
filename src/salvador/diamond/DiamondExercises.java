@@ -13,11 +13,14 @@ package salvador.diamond;
  Code Smell #4: (Bloater)
  Solution:
 
- Code Smell #5: (OO Abuser)
+ Code Smell #5: Private vs Public (OO Abuser..?)
+ Solution: Keep helper methods as private, but change access modifier to public for drawing-methods that may
+ be used by other classes (hypothetically)
  */
 
 
 public class DiamondExercises {
+
     public static void main(String[] args) {
         drawAnIsoscelesTriangle(3);
         System.out.println();
@@ -30,10 +33,10 @@ public class DiamondExercises {
 //              *
 //             ***
 //            *****
-    private static void drawAnIsoscelesTriangle(int n) {
-
+    public static void drawAnIsoscelesTriangle(int n) {
         int startingNumOfSpaces = n-1;
         int startingNumAsterisks = 1;
+
         for (int i = 1; i <= n; i++, startingNumOfSpaces--, startingNumAsterisks+=2){
             printCharacters(startingNumOfSpaces, " ");
             printCharacters(startingNumAsterisks, "*");
@@ -50,7 +53,7 @@ public class DiamondExercises {
 //            *****
 //             ***
 //              *
-    private static void drawADiamond(int n) {
+    public static void drawADiamond(int n) {
         drawAnIsoscelesTriangle(n);
         drawBottomPartDiamond(n);
     }
@@ -63,7 +66,7 @@ public class DiamondExercises {
 //           Bill
 //            ***
 //             *
-    private static void drawADiamondWithYourName(int n) {
+    public static void drawADiamondWithYourName(int n) {
         int numAsterisksAtBase = (n * 2)-1;
         int numAsterisksInRow = 1;
 
@@ -73,7 +76,6 @@ public class DiamondExercises {
             printCharacters(currPadding, " ");
             printCharacters(numAsterisksInRow, "*");
             printCharacters(currPadding, " ");
-
             System.out.println();
         }
 
