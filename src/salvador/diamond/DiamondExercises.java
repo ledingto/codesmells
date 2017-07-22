@@ -2,7 +2,7 @@ package salvador.diamond;
 
 /*
  Code Smell #1: Duplicate Code (Dispensable)
- Solution: helper method printCharacters(..)
+ Solution: helper method printCharacters(..) and printTriangle(..)
  */
 
 
@@ -41,25 +41,10 @@ public class DiamondExercises {
         int numPadding = n-1;
         int start = 1;
 
-        for (int i = 1; i <= n; i++, numPadding--, start+=2){
-
-            //left padding
-            printCharacters(numPadding, " ");
-            //asterisks in between
-            printCharacters(start, "*");
-            //right padding
-            printCharacters(numPadding, " ");
-
-            System.out.println();
-        }
+        printTriangle(n, numPadding, start, false);
 
     }
 
-    private static void printCharacters(int numCharacters, String character) {
-        for (int j = 0; j < numCharacters; j++) {
-            System.out.print(character);
-        }
-    }
 
 
 
@@ -77,17 +62,7 @@ public class DiamondExercises {
         int numPadding = 1;
         int start = (n*2)-3;
 
-        for (int i = 1; i <= n; i++, numPadding++, start-=2){
-
-            //left padding
-            printCharacters(numPadding, " ");
-            //asterisks in between
-            printCharacters(start, "*");
-            //right padding
-            printCharacters(numPadding, " ");
-
-            System.out.println();
-        }
+        printTriangle(n, numPadding, start, true);
     }
 
     //    Diamond with Name
@@ -139,6 +114,36 @@ public class DiamondExercises {
             printCharacters(currPadding, " ");
 
             System.out.println();
+        }
+    }
+
+    
+    private static void printCharacters(int numCharacters, String character) {
+        for (int j = 0; j < numCharacters; j++) {
+            System.out.print(character);
+        }
+    }
+
+    private static void printTriangle(int n, int numPadding, int start, boolean reverse) {
+        for (int i = 1; i <= n; i++){
+
+            //left padding
+            printCharacters(numPadding, " ");
+            //asterisks in between
+            printCharacters(start, "*");
+            //right padding
+            printCharacters(numPadding, " ");
+
+            System.out.println();
+
+            if (reverse==true) {
+                numPadding++;
+                start-=2;
+            }
+            else {
+                numPadding--;
+                start+=2;
+            }
         }
     }
 }
