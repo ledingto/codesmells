@@ -8,6 +8,14 @@ import java.util.concurrent.ThreadLocalRandom;
 // once they guess correctly. Use an ArrayList to store the guesses. Catch the NumberFormatException and handle the case
 // where the user entered a String that is not parseable.
 
+/*
+ Code Smell #1: (Dispensable)
+ Code Smell #2: (Dispensable)
+ Code Smell #3: (Bloater)
+ Code Smell #4: (Bloater)
+ Code Smell #5: (OO Abuser)
+ */
+
 public class Main {
 
     public static void main(String[] args) {
@@ -96,19 +104,19 @@ class UserInput{
 }
 
 class Dialogue{
-    public final static String Success = "Congratulations. You won!";
-    public final static String TooLow = "Sorry, this number is too low. Try again";
-    public final static String TooHigh = "Sorry, this number is too high. Try again";
-    public final static String Begin = "Guess a number between 1 and 100";
-    public final static String TryAgain = "It appears you entered an invalid number! \nPlease pick a number 1-100";
+    public final static String SUCCESS = "Congratulations. You won!";
+    public final static String TOO_LOW = "Sorry, this number is too low. Try again";
+    public final static String TOO_HIGH = "Sorry, this number is too high. Try again";
+    public final static String BEGIN = "Guess a number between 1 and 100";
+    public final static String TRY_AGAIN = "It appears you entered an invalid number! \nPlease pick a number 1-100";
 
-    public void begin(){System.out.println(Begin);}
+    public void begin(){System.out.println(BEGIN);}
 
-    public void success(){System.out.println(Success);}
+    public void success(){System.out.println(SUCCESS);}
 
-    public void tooLow(){System.out.println(TooLow);}
+    public void tooLow(){System.out.println(TOO_LOW);}
 
-    public void tooHigh(){System.out.println(TooHigh);}
+    public void tooHigh(){System.out.println(TOO_HIGH);}
 
-    public void tryAgain(){System.out.println(TryAgain);}
+    public void tryAgain(){System.out.println(TRY_AGAIN);}
 }
