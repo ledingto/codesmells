@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
  Code Smell #2: (Dispensable)
  Code Smell #3: (Bloater)
  Code Smell #4: (Bloater)
- Code Smell #5: (OO Abuser)
+ Code Smell #5: No abuse of switch statements, temporary fields, refused bequests, or inheritance (OO Abuser)
  */
 
 public class Main {
@@ -99,8 +99,6 @@ class UserInput{
             return true;
         else return false;
     }
-
-
 }
 
 class Dialogue{
