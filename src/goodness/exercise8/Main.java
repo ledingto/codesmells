@@ -12,7 +12,11 @@ import java.util.concurrent.ThreadLocalRandom;
  Code Smell #1: Data Class -- Dialogue (Dispensable)
  Solution: Encapsulate fields. Don't want to migrate functionality (while loop) to Dialogue class because of
  coupling with UserInput class.
- Code Smell #2: (Dispensable)
+ Code Smell #2: Lazy Class -- Dialogue (Dispensable)
+ Solution: Reduce overhead by using print statements in Main and deleting Dialogue. Drawback: reduce
+ encapsulation and separation/control of what is said during game.
+ Ultimately I choose to keep the Dialogue class because it makes it easy for programmers to find, change,
+ protect, and maintain what is said during the game, despite class overhead.
  Code Smell #3: (Bloater)
  Code Smell #4: (Bloater)
  Code Smell #5: No abuse of switch statements, temporary fields, refused bequests, or inheritance (OO Abuser)
@@ -25,26 +29,25 @@ public class Main {
         int randomNumber = ThreadLocalRandom.current().nextInt(1, 100 + 1);
         Scanner kb = new Scanner(System.in);
         UserInput userInput = new UserInput();
-        Dialogue dialogue = new Dialogue();
 
-        dialogue.begin();
+        System.out.println("Guess a number between 1 and 100");
 
         while (true) {
             userInput.setUserInput(kb.nextLine());
 
             if(userInput.isInvalid()) {
-                dialogue.tryAgain();
+                System.out.println("It appears you entered an invalid number! \nPlease pick a number 1-100");
             }
             else if (userInput.is(randomNumber)) {
-                dialogue.success();
+                System.out.println("Congratulations. You won!");
                 userInput.printHistory();
                 break;
             }
             else if (userInput.isGreaterThan(randomNumber)) {
-                dialogue.tooHigh();
+                System.out.println("Sorry, this number is too high. Try again");
             }
             else if (userInput.isLessThan(randomNumber)) {
-                dialogue.tooLow();
+                System.out.println("Sorry, this number is too low. Try again");
             }
         }
     }
@@ -101,22 +104,4 @@ class UserInput{
             return true;
         else return false;
     }
-}
-
-class Dialogue{
-    private final static String SUCCESS = "Congratulations. You won!";
-    private final static String TOO_LOW = "Sorry, this number is too low. Try again";
-    private final static String TOO_HIGH = "Sorry, this number is too high. Try again";
-    private final static String BEGIN = "Guess a number between 1 and 100";
-    private final static String TRY_AGAIN = "It appears you entered an invalid number! \nPlease pick a number 1-100";
-
-    public void begin(){System.out.println(BEGIN);}
-
-    public void success(){System.out.println(SUCCESS);}
-
-    public void tooLow(){System.out.println(TOO_LOW);}
-
-    public void tooHigh(){System.out.println(TOO_HIGH);}
-
-    public void tryAgain(){System.out.println(TRY_AGAIN);}
 }
