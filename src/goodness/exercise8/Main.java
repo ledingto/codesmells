@@ -9,7 +9,9 @@ import java.util.concurrent.ThreadLocalRandom;
 // where the user entered a String that is not parseable.
 
 /*
- Code Smell #1: (Dispensable)
+ Code Smell #1: Data Class -- Dialogue (Dispensable)
+ Solution: Encapsulate fields. Don't want to migrate functionality (while loop) to Dialogue class because of
+ coupling with UserInput class.
  Code Smell #2: (Dispensable)
  Code Smell #3: (Bloater)
  Code Smell #4: (Bloater)
@@ -102,11 +104,11 @@ class UserInput{
 }
 
 class Dialogue{
-    public final static String SUCCESS = "Congratulations. You won!";
-    public final static String TOO_LOW = "Sorry, this number is too low. Try again";
-    public final static String TOO_HIGH = "Sorry, this number is too high. Try again";
-    public final static String BEGIN = "Guess a number between 1 and 100";
-    public final static String TRY_AGAIN = "It appears you entered an invalid number! \nPlease pick a number 1-100";
+    private final static String SUCCESS = "Congratulations. You won!";
+    private final static String TOO_LOW = "Sorry, this number is too low. Try again";
+    private final static String TOO_HIGH = "Sorry, this number is too high. Try again";
+    private final static String BEGIN = "Guess a number between 1 and 100";
+    private final static String TRY_AGAIN = "It appears you entered an invalid number! \nPlease pick a number 1-100";
 
     public void begin(){System.out.println(BEGIN);}
 
