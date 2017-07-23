@@ -17,7 +17,8 @@ import java.util.concurrent.ThreadLocalRandom;
  encapsulation and separation/control of what is said during game.
  Ultimately I choose to keep the Dialogue class because it makes it easy for programmers to find, change,
  protect, and maintain what is said during the game, despite class overhead.
- Code Smell #3: (Bloater)
+ Code Smell #3: No absurdly long classes or methods, overuse of primitives, long parameter lists,
+ or data clumps (Bloater)
  Code Smell #4: (Bloater)
  Code Smell #5: No abuse of switch statements, temporary fields, refused bequests, or inheritance (OO Abuser)
  */
