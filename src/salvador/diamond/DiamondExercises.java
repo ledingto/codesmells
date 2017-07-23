@@ -8,14 +8,14 @@ package salvador.diamond;
  Solution: delete the comments and change variable/method names to explain purpose/function
 
  Code Smell #3: Long Method (Bloater)
- Solution: extract logic (loops, conditionals, etc.) into helper method [drawBottomPartDiamond(..)]
+ Solution: extract logic (loops, conditionals, etc.) into helper method drawBottomPartDiamond(..)
 
  Code Smell #4: (Bloater)
  Solution:
 
  Code Smell #5: Private vs Public (OO Abuser..?)
  Solution: Keep helper methods as private, but change access modifier to public for drawing-methods that may
- be used by other classes (hypothetically)
+ be used by other classes
  */
 
 
