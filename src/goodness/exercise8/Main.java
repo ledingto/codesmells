@@ -29,25 +29,26 @@ public class Main {
         int randomNumber = ThreadLocalRandom.current().nextInt(1, 100 + 1);
         Scanner kb = new Scanner(System.in);
         UserInput userInput = new UserInput();
+        Dialogue dialogue = new Dialogue();
 
-        System.out.println("Guess a number between 1 and 100");
+        dialogue.begin();
 
         while (true) {
             userInput.setUserInput(kb.nextLine());
 
             if(userInput.isInvalid()) {
-                System.out.println("It appears you entered an invalid number! \nPlease pick a number 1-100");
+                dialogue.tryAgain();
             }
             else if (userInput.is(randomNumber)) {
-                System.out.println("Congratulations. You won!");
+                dialogue.success();
                 userInput.printHistory();
                 break;
             }
             else if (userInput.isGreaterThan(randomNumber)) {
-                System.out.println("Sorry, this number is too high. Try again");
+                dialogue.tooHigh();
             }
             else if (userInput.isLessThan(randomNumber)) {
-                System.out.println("Sorry, this number is too low. Try again");
+                dialogue.tooLow();
             }
         }
     }
@@ -104,4 +105,22 @@ class UserInput{
             return true;
         else return false;
     }
+}
+
+class Dialogue{
+    private final static String SUCCESS = "Congratulations. You won!";
+    private final static String TOO_LOW = "Sorry, this number is too low. Try again";
+    private final static String TOO_HIGH = "Sorry, this number is too high. Try again";
+    private final static String BEGIN = "Guess a number between 1 and 100";
+    private final static String TRY_AGAIN = "It appears you entered an invalid number! \nPlease pick a number 1-100";
+
+    public void begin(){System.out.println(BEGIN);}
+
+    public void success(){System.out.println(SUCCESS);}
+
+    public void tooLow(){System.out.println(TOO_LOW);}
+
+    public void tooHigh(){System.out.println(TOO_HIGH);}
+
+    public void tryAgain(){System.out.println(TRY_AGAIN);}
 }
